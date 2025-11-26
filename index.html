@@ -3,85 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Site</title>
+  <title>Home - My Site</title>
   <style>
-    body {
+    /* Reset and base */
+    body, html {
+      margin: 0; padding: 0; height: 100%;
       font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #f0f0f5;
-      color: #222;
+      background: #121826; /* dark background */
+      color: #eee;
+      overflow-x: hidden;
+      position: relative;
     }
     header {
-      background: #5a3eaa;
+      background: #0b1a4d; /* navy blue */
       padding: 15px 20px;
       display: flex;
       justify-content: center;
       gap: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
     }
-    header button {
-      background: #7c57e0;
-      border: none;
+    header a {
+      background: #1a2a75;
       color: white;
+      text-decoration: none;
       padding: 10px 20px;
       border-radius: 8px;
-      cursor: pointer;
       font-size: 16px;
       transition: background 0.3s;
+      display: inline-block;
     }
-    header button:hover,
-    header button:focus {
-      background: #a084f9;
+    header a:hover,
+    header a:focus {
+      background: #3749b3;
       outline: none;
     }
     main {
       max-width: 900px;
-      margin: 30px auto;
+      margin: 40px auto;
       padding: 20px;
-      background: white;
+      background: #1f284d;
       border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.7);
       min-height: 400px;
+      color: #eee;
+    }
+    /* Snowflakes container */
+    #snowflake-container {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 999;
+      overflow: hidden;
+    }
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      user-select: none;
+      font-size: 1.5em;
+      opacity: 0.8;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.2;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <button onclick="navigate('index.html')">Home</button>
-    <button onclick="navigate('about')">About</button>
-    <button onclick="navigate('photos.html')">Gallery</button>
-    <button onclick="navigate('contact')">Contact</button>
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="about.html">About</a>
+    <a href="photos.html">Gallery</a>
+    <a href="contact.html">Contact</a>
   </header>
 
-  <main id="content">
-    <!-- Your page content will go here -->
+  <main>
+    <h1>Welcome to my site</h1>
+    <p>Add your own content here.</p>
   </main>
 
-  <script>
-    // Basic client-side navigation
-    function navigate(page) {
-      const content = document.getElementById('content');
-      content.innerHTML = ''; // clear content
+  <div id="snowflake-container"></div>
 
-      switch(page) {
-        case 'home':
-          content.innerHTML = '<h1>Home</h1><p>(Add your own content here.)</p>';
-          break;
-        case 'about':
-          content.innerHTML = '<h1>About</h1><p>(Add your own content here.)</p>';
-          break;
-        case 'gallery':
-          content.innerHTML = '<h1>Gallery</h1><p>(Add your own content here.)</p>';
-          break;
-        case 'contact':
-          content.innerHTML = '<h1>Contact</h1><p>(Add your own content here.)</p>';
-          break;
-        default:
-          content.innerHTML = '<h1>Welcome!</h1>';
-      }
+  <script>
+    // Snowflake generator
+    const container = document.getElementById('snowflake-container');
+    const snowflakeCount = 30; // number of snowflakes
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
     }
 
-    // Show home content by default
-    navigate('home');
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄'; // Unicode snowflake
+
+      // Random horizontal position
+      snowflake.style.left = `${random(0, 100)}vw`;
+      // Random size
+      const size = random(10, 24);
+      snowflake.style.fontSize = `${size}px`;
+      // Random animation duration (fall speed)
+      snowflake.style.animationDuration = `${random(5, 15)}s`;
+      // Random animation delay so they don't all fall together
+      snowflake.style.animationDelay = `${random(0, 15)}s`;
+
+      container.appendChild(snowflake);
+
+      // Remove snowflake after animation ends to keep DOM clean
+      setTimeout(() => {
+        snowflake.remove();
+        createSnowflake();
+      }, parseFloat(snowflake.style.animationDuration) * 1000 + 1000);
+    }
+
+    // Create initial batch
+    for (let i = 0; i < snowflakeCount; i++) {
+      createSnowflake();
+    }
   </script>
 </body>
 </html>
