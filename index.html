@@ -1,172 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>All About Me</title>
-  <meta name="description" content="A simple, friendly 'About Me' page for a 13-year-old who likes art, photography, music, and programming." />
+  <title>My Site</title>
   <style>
-    :root{
-      --bg:#f7f7fb; --card:#ffffff; --muted:#6b7280; --accent:#6d28d9; --glass:rgba(255,255,255,0.6);
-      --radius:14px;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f0f0f5;
+      color: #222;
     }
-    [data-theme="dark"]{ --bg:#0b1020; --card:#0f1724; --muted:#9ca3af; --accent:#7c3aed; --glass:rgba(255,255,255,0.02); }
-
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial; background:var(--bg); color:var(--muted);}
-    .wrap{max-width:920px;margin:28px auto;padding:20px}
-
-    header{display:flex;gap:18px;align-items:center}
-    .avatar{width:96px;height:96px;border-radius:16px;flex:0 0 96px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:grid;place-items:center;color:white;font-weight:700;font-size:28px}
-    h1{margin:0;font-size:22px;color:var(--card);}
-    .byline{font-size:14px;color:var(--muted);margin-top:6px}
-
-    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 6px 22px rgba(16,24,40,0.06);color:inherit}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .tag{background:linear-gradient(90deg,rgba(124,58,237,0.12),rgba(59,130,246,0.06));padding:6px 10px;border-radius:999px;font-size:13px;color:var(--accent)}
-
-    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .section-title h2{margin:0;font-size:16px;color:var(--muted)}
-    .controls button{background:none;border:1px solid transparent;padding:8px;border-radius:8px;cursor:pointer}
-
-    .about p{line-height:1.5;color:var(--muted)}
-    .interests{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-    .interest{display:flex;gap:12px;align-items:center}
-    .icon{width:46px;height:46px;border-radius:10px;background:var(--glass);display:grid;place-items:center;color:var(--accent);font-weight:700}
-
-    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .photo{height:110px;border-radius:10px;overflow:hidden;display:block;text-decoration:none;background:linear-gradient(180deg,#e6e9f2,#f8f9ff);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
-
-    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
-
-    /* Responsive */
-    @media (max-width:880px){.grid{grid-template-columns:1fr}.avatar{width:72px;height:72px}}
-
-    /* Focus styles for accessibility */
-    a:focus,button:focus{outline:3px solid rgba(99,102,241,0.18);outline-offset:2px}
+    header {
+      background: #5a3eaa;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    header button {
+      background: #7c57e0;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    header button:hover,
+    header button:focus {
+      background: #a084f9;
+      outline: none;
+    }
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      min-height: 400px;
+    }
   </style>
 </head>
-<body data-theme="light">
-  <main class="wrap">
-    <header>
-      <div class="avatar" aria-hidden="true">13</div>
-      <div>
-        <h1 class="card" style="display:inline-block;padding:10px 14px;">Hi my names Ethan, Im 13.</h1>
-        <div class="byline">I have autism • I like art, photography, music and programming</div>
-        <div class="tags" aria-hidden="true">
-          <span class="tag">Art</span>
-          <span class="tag">Photography</span>
-          <span class="tag">Music</span>
-          <span class="tag">Programming</span>
-          <span class="tag">Autistic</span>
-        </div>
-      </div>
-    </header>
+<body>
+  <header>
+    <button onclick="navigate('home')">Home</button>
+    <button onclick="navigate('about')">About</button>
+    <button onclick="navigate('gallery')">Gallery</button>
+    <button onclick="navigate('contact')">Contact</button>
+  </header>
 
-    <div class="grid">
-      <section class="card about" aria-labelledby="about-title">
-        <div class="section-title">
-          <h2 id="about-title">About me</h2>
-          <div class="controls">
-            <button id="theme-toggle" aria-pressed="false" title="Toggle dark mode">Toggle theme</button>
-            <button id="big-text" title="Make text bigger">A+</button>
-          </div>
-        </div>
-
-        <p>Hello! I'm 13 years old. I have autism and that means my brain works in some special ways — I notice lots of details, I love focusing on things I care about, and I like routines. I also love making things: drawing, taking photos, listening to and making music, and building small projects with code.</p>
-
-        <div class="interests" aria-label="Interests">
-          <div class="interest">
-            <div class="icon" aria-hidden="true">🎨</div>
-            <div>
-              <strong>Art</strong>
-              <div style="font-size:13px;color:var(--muted)">I like drawing, painting and experimenting with color and texture.</div>
-            </div>
-          </div>
-
-          <div class="interest">
-            <div class="icon" aria-hidden="true">📷</div>
-            <div>
-              <strong>Photography</strong>
-              <div style="font-size:13px;color:var(--muted)">I enjoy taking photos — landscapes, close-ups and everyday moments.</div>
-            </div>
-          </div>
-
-          <div class="interest">
-            <div class="icon" aria-hidden="true">🎵</div>
-            <div>
-              <strong>Music</strong>
-              <div style="font-size:13px;color:var(--muted)">I like listening to different styles and sometimes make little tunes.</div>
-            </div>
-          </div>
-
-          <div class="interest">
-            <div class="icon" aria-hidden="true">💻</div>
-            <div>
-              <strong>Programming</strong>
-              <div style="font-size:13px;color:var(--muted)">I enjoy learning to code and building things that work on a computer.</div>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <aside class="card" aria-labelledby="gallery-title">
-        <div class="section-title">
-          <h2 id="gallery-title">Photos & small gallery</h2>
-        </div>
-
-        <div class="gallery" role="list">
-          <a href="#" class="photo" role="listitem" aria-label="Photo 1">Photo 1</a>
-          <a href="#" class="photo" role="listitem" aria-label="Photo 2">Photo 2</a>
-          <a href="#" class="photo" role="listitem" aria-label="Photo 3">Photo 3</a>
-          <a href="#" class="photo" role="listitem" aria-label="Photo 4">Photo 4</a>
-          <a href="#" class="photo" role="listitem" aria-label="Photo 5">Photo 5</a>
-          <a href="#" class="photo" role="listitem" aria-label="Photo 6">Photo 6</a>
-        </div>
-
-        <p style="font-size:13px;color:var(--muted);margin-top:10px">Tip: Replace these boxes with your photos. Save images in the same folder and edit the <code>&lt;a&gt;</code> tags to use <code>&lt;img src="your-photo.jpg"&gt;</code>.</p>
-      </aside>
-    </div>
-
-    <div class="card" style="margin-top:18px">
-      <div class="section-title"><h2>Fun stuff</h2></div>
-      <p style="margin:0 0 10px 0">Try these:</p>
-      <ul style="color:var(--muted)">
-        <li>Click <strong>Toggle theme</strong> to switch light/dark (works with keyboard too).</li>
-        <li>Press <strong>A+</strong> to increase text size for readability.</li>
-        <li>Make your own mini-project: a drawing, a photo edit, or a tiny web page with a gallery.</li>
-      </ul>
-    </div>
-
-    <footer>
-      <div class="card" style="display:inline-block;padding:10px 14px">Made by me — feel free to change anything!</div>
-    </footer>
+  <main id="content">
+    <!-- Your page content will go here -->
   </main>
 
   <script>
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const bigText = document.getElementById('big-text');
-    const body = document.body;
+    // Basic client-side navigation
+    function navigate(page) {
+      const content = document.getElementById('content');
+      content.innerHTML = ''; // clear content
 
-    themeToggle.addEventListener('click', () => {
-      const isDark = body.getAttribute('data-theme') === 'dark';
-      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      themeToggle.setAttribute('aria-pressed', String(!isDark));
-    });
+      switch(page) {
+        case 'home':
+          content.innerHTML = '<h1>Home</h1><p>(Add your own content here.)</p>';
+          break;
+        case 'about':
+          content.innerHTML = '<h1>About</h1><p>(Add your own content here.)</p>';
+          break;
+        case 'gallery':
+          content.innerHTML = '<h1>Gallery</h1><p>(Add your own content here.)</p>';
+          break;
+        case 'contact':
+          content.innerHTML = '<h1>Contact</h1><p>(Add your own content here.)</p>';
+          break;
+        default:
+          content.innerHTML = '<h1>Welcome!</h1>';
+      }
+    }
 
-    // Increase text size
-    let big = false;
-    bigText.addEventListener('click', () => {
-      big = !big;
-      document.documentElement.style.fontSize = big ? '18px' : '';
-      bigText.textContent = big ? 'A–' : 'A+';
-    });
-
-    // Keyboard friendly: allow Enter on buttons
-    [themeToggle, bigText].forEach(el => el.addEventListener('keyup', (e) => { if (e.key === 'Enter') el.click(); }));
+    // Show home content by default
+    navigate('home');
   </script>
 </body>
 </html>
