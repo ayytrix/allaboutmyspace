@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Site</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f0f0f5;
+      color: #222;
+    }
+    header {
+      background: #5a3eaa;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    header button {
+      background: #7c57e0;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    header button:hover,
+    header button:focus {
+      background: #a084f9;
+      outline: none;
+    }
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      min-height: 400px;
+    }
+
+    /* Gallery styles */
+    .gallery-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .photo-frame {
+      width: 45%;
+      border: 3px solid #7c57e0;
+      border-radius: 12px;
+      height: 300px;
+      background: #eae7f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .photo-frame img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button onclick="navigate('home')">Home</button>
+    <button onclick="navigate('about')">About</button>
+    <button onclick="navigate('gallery')">Gallery</button>
+    <button onclick="navigate('contact')">Contact</button>
+  </header>
+
+  <main id="content">
+    <!-- Your page content will go here -->
+  </main>
+
+  <script>
+    function navigate(page) {
+      const content = document.getElementById('content');
+      content.innerHTML = ''; // clear content
+
+      switch(page) {
+        case 'home':
+          content.innerHTML = '<h1>Home</h1><p>(Add your own content here.)</p>';
+          break;
+        case 'about':
+          content.innerHTML = '<h1>About</h1><p>(Add your own content here.)</p>';
+          break;
+        case 'gallery':
+          content.innerHTML = `
+            <h1>Gallery</h1>
+            <div class="gallery-container">
+              <div class="photo-frame">
+                <!-- Replace with your image -->
+                <img src="https://via.placeholder.com/400x300?text=Photo+1" alt="Photo 1" />
+              </div>
+              <div class="photo-frame">
+                <!-- Replace with your image -->
+                <img src="https://via.placeholder.com/400x300?text=Photo+2" alt="Photo 2" />
+              </div>
+            </div>
+          `;
+          break;
+        case 'contact':
+          content.innerHTML = '<h1>Contact</h1><p>(Add your own content here.)</p>';
+          break;
+        default:
+          content.innerHTML = '<h1>Welcome!</h1>';
+      }
+    }
+
+    // Show home content by default
+    navigate('home');
+  </script>
+</body>
+</html>
