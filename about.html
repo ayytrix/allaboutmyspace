@@ -107,7 +107,7 @@
   </main>
 
   <div style="text-align: center; margin: 30px 40px;">
-    <button id="buy-hot-choc" style="
+  <button id="buy-hot-choc" style="
       background-color: #7c57e0;
       color: white;
       border: none;
@@ -115,10 +115,17 @@
       font-size: 18px;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.3s;
       box-shadow: 0 4px 8px rgba(124, 87, 224, 0.6);
-    ">Buy me a hot chocolate</button>
-  </div>
+      transition: background-color 0.3s;
+  ">Buy me a hot chocolate</button>
+</div>
+
+<script>
+  document.getElementById('buy-hot-choc').addEventListener('click', () => {
+    window.open('https://buymeacoffee.com/morgan74?new=1', '_blank');
+  });
+</script>
+
 
   <div id="snowflake-container"></div>
 
